@@ -2,15 +2,12 @@
 requires = [
     "setuptools>=42",
     "wheel",
-    "Cython~=3.0.5",
     "numpy>=2.0.0rc1",
-    "versioneer[toml]"
 ]
-build-backend = "setuptools.build_meta"
 
 [project]
 name = "feature-selection-toolkit"
-version = "0.2.1"
+version = "0.2.2"
 description = "A toolkit for feature selection in machine learning projects."
 readme = "README.md"
 authors = [
@@ -46,5 +43,4 @@ classifiers = [
 
 [project.urls]
 homepage = "https://github.com/mevlt01001/feature_selection_toolkit"
-documentation = "https://github.com/mevlt01001/feature_selection_toolkit#readme"
 repository = "https://github.com/mevlt01001/feature_selection_toolkit"

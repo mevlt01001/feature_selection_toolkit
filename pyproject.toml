@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "feature-selection-toolkit"
-version = "0.2.0"
+version = "0.2.1"
 description = "A toolkit for feature selection in machine learning projects."
 readme = "README.md"
 authors = [

@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="feature_selection_toolkit",
-    version="0.2.2",
+    version="0.2.3",
     author="Mevlüt Başaran",
     author_email="mevlutbasaran01@gmail.com",
     description="A comprehensive toolkit for feature selection in machine learning.",

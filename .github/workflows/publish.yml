@@ -16,10 +16,14 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+          # Optionally, you can use a virtual environment
+          # to isolate dependencies
+          # architecture: x64  # Uncomment if needed
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install setuptools wheel  # Ensure setuptools and wheel are installed
           pip install build
           pip install twine
 

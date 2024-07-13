@@ -7,7 +7,7 @@ requires = [
 
 [project]
 name = "feature-selection-toolkit"
-version = "0.2.3"
+version = "0.2.4"
 description = "A toolkit for feature selection in machine learning projects."
 readme = "README.md"
 authors = [

@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "feature_selection_toolkit"
+version = "0.4.0"
+description = "A confident Python library implementing a comprehensive suite of feature selection techniques."
+keywords = ["feature", "row", "column", "column selection", "feature selection", "machine learning", "data science", "python library"]
+authors = [
+    { name = "Mevlüt Başaran", email = "mevlut@example.com" }
+]
+license = { text = "MIT License" }
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+maintainers = [
+  {name = "Mevlüt Başaran", email = "mevlutbasaran01@gmail.com"}
+]
+dependencies = [
+    'pandas >= 2.2.2',
+    'scikit-learn >= 1.4.2',
+    'tqdm >= 4.66.4',
+    'xgboost >= 2.1.0',
+    'statsmodels >= 0.14.2',
+    'joblib >= 1.4.2',
+    'matplotlib >= 3.8.4'
+    'numpy >= 1.26.4'
+]
+
+[project.urls]
+Repository = "https://github.com/mevlt01001/feature_selection_toolkit"
+Source = "https://github.com/mevlt01001/feature_selection_toolkit"
+Documentation = "https://github.com/mevlt01001/feature_selection_toolkit#README.md"
+Tracker = "https://github.com/mevlt01001/feature_selection_toolkit/issues"
+
+[tool.setuptools.package-data]
+"feature_selection_toolkit" = ["*"]

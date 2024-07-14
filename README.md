@@ -259,9 +259,11 @@ We welcome contributions to the Feature Selection Toolkit. If you have ideas for
 
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
-3. Commit your changes with clear and concise messages.
-4. Push your branch to your forked repository.
-5. Submit a pull request with a detailed description of your changes.
+3. Make your changes, ensuring they are clear and concise.
+4. Commit your changes with descriptive commit messages.
+5. Push your branch to your forked repository on GitHub.
+6. Submit a pull request with a detailed description of your changes.
+
 
 For major changes, please open an issue first to discuss what you would like to change.
 

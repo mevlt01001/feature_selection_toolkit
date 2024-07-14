@@ -6,6 +6,7 @@ setup(
     author='Mevlüt Başaran',
     author_email='mevlutbasaran01@gmail.com',
     description='A comprehensive toolkit for performing various feature selection techniques in machine learning.',
+    license=open('LICENSE').read(),
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/mevlut01001/feature_selection_toolkit',

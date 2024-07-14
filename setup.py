@@ -9,7 +9,14 @@ setup(
     license=open('LICENSE').read(),
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/mevlut01001/feature_selection_toolkit',
+    url='https://github.com/mevlt01001/feature_selection_toolkit',
+    project_urls={
+        'GitHub': 'https://github.com/mevlt01001',
+        'Bug Tracker': 'https://github.com/mevlt01001/feature_selection_toolkit/issues',
+        'LinkedIn': 'https://www.linkedin.com/in/mevl%C3%BCt-ba%C5%9Faran-b46888251/',
+        'Kaggle': 'https://www.kaggle.com/mevltbaaran',
+        
+    },
     packages=find_packages(),
     classifiers=[
         'Development Status :: 4 - Beta',

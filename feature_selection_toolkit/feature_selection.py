@@ -245,11 +245,22 @@ class FeatureSelection:
             Scores and p-values of the features.
         """
         if method not in ['chi2', 'anova']:
-            raise ValueError("Unknown filter method. Please choose 'chi2' or 'anova'.")
+            raise ValueError(f"Unknown method: {method}. Please choose 'chi2' or 'anova'.")
 
         method_func = chi2 if method == 'chi2' else f_classif
-        scores, p_values = method_func(self._X, self._y)
+
+        if method == 'chi2':
+
+            X_positive = self._X - np.min(self._X)  # X'i pozitif yapmak için kaydırma
+            return chi2(X_positive, self._y)
+        
+        else:
+
+            scores, p_values = method_func(self._X, self._y)
+
         return scores, p_values
+
+        
 
     def recursive_feature_elimination(self, estimator, n_features_to_select=None, force=False):
         """Perform recursive feature elimination (RFE).

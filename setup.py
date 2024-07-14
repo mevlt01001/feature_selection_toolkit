@@ -39,4 +39,6 @@ setup(
         'matplotlib >= 3.8.4',
         'numpy >= 1.26.4',
     ],
+    test_suite='feature_selection_test',
+    tests_require=['pytest'],
 )

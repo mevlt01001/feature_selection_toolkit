@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "feature_selection_toolkit"
-version = "0.4.0"
+version = "0.4.1"
 description = "A confident Python library implementing a comprehensive suite of feature selection techniques."
 keywords = ["feature", "row", "column", "column selection", "feature selection", "machine learning", "data science", "python library"]
 authors = [

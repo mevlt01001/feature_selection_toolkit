@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='feature_selection_toolkit',
-    version='1.0.3',
+    version='1.0.4',
     author='Mevlüt Başaran',
     author_email='mevlutbasaran01@gmail.com',
     description='A comprehensive toolkit for performing various feature selection techniques in machine learning.',
@@ -44,7 +44,7 @@ setup(
         'statsmodels>=0.14.2,<1.0.0',
         'joblib>=1.4.2,<2.0.0',
         'matplotlib>=3.8.4,<4.0.0',
-        'numpy>=1.26.4,<2.0.0',
+        'numpy>=1.0.0,<2.0.0',
 ],
 
     test_suite='feature_selection_test',

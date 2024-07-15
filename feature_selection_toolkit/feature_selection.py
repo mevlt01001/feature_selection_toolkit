@@ -17,6 +17,7 @@ from joblib import Parallel, delayed
 from matplotlib import pyplot as plt
 import statsmodels.api as sm
 import warnings
+import inspect
 
 # Ignore warnings
 warnings.filterwarnings("ignore")
@@ -312,7 +313,7 @@ class FeatureSelection:
         # Convert to numpy array
         ranked_features = np.array([selected_features, selected_ranked]).T
 
-        return ranked_features
+        return self.__find_best_score(ranked_features.tolist())
             
     def embedded_method(self, method='lasso', alpha=1.0):
         """Perform embedded method for feature selection.
@@ -458,7 +459,14 @@ class FeatureSelection:
         tuple
             The best score and the corresponding feature combination.
         """
-        return sorted(scores.items(), key=lambda x: x[1][1], reverse=True)
+        caller_frame = inspect.currentframe().f_back
+        caller_name = caller_frame.f_code.co_name
+
+        if caller_name == 'recursive_feature_elimination':
+            return sorted(scores, key=lambda x: x[1], reverse=False)
+        
+        if caller_name == 'scored_columns':
+            return sorted(scores.items(), key=lambda x: x[1][1], reverse=True)
     
     @staticmethod
     def __find_bad_feature(pvalues, columns):

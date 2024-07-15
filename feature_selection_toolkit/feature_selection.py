@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import pandas as pd
 from itertools import combinations
@@ -128,23 +129,26 @@ class FeatureSelection:
             The selected features.
         """
         features = self._X.columns.tolist()
+        
+        # Create a tqdm progress bar
+        with tqdm(total=len(features), desc="Backward Elimination", unit="feature") as pbar:
+            while features:
+                self._estimator.fit(self._X_train[features], self._y_train)
+                pred = self._estimator.predict(self._X_test[features])
 
-        while features:
-            self._estimator.fit(self._X_train[features], self._y_train)
-            pred = self._estimator.predict(self._X_test[features])
+                model = sm.OLS(pred, sm.add_constant(self._X_test[features])).fit()
+                p_values = model.pvalues
 
-            model = sm.OLS(pred, sm.add_constant(self._X_test[features])).fit()
-            p_values = model.pvalues
+                bad_feature = self.__find_bad_feature(pvalues=p_values, columns=features)
 
-            bad_feature = self.__find_bad_feature(pvalues=p_values, columns=features)
-
-            if bad_feature is not None:
-                if p_values[bad_feature] > significance_level:
-                    features.remove(bad_feature)
+                if bad_feature is not None:
+                    if p_values[bad_feature] > significance_level:
+                        features.remove(bad_feature)
+                        pbar.update(1)  # Update the progress bar for each removed feature
+                    else:
+                        break
                 else:
                     break
-            else:
-                break
 
         return features
 
@@ -170,22 +174,25 @@ class FeatureSelection:
         features = self._X.columns.tolist()
         selected_features = []
 
-        for i in range(len(features)):
-            for feature in features:
-                current_features = selected_features + [feature]
+        
+        with tqdm(total=len(features), desc="Forward Selection", unit="feature") as pbar:
+            for i in range(len(features)):
+                for feature in features:
+                    current_features = selected_features + [feature]
 
-                self._estimator.fit(self._X_train[current_features], self._y_train)
-                pred = self._estimator.predict(self._X_test[current_features])
+                    self._estimator.fit(self._X_train[current_features], self._y_train)
+                    pred = self._estimator.predict(self._X_test[current_features])
 
-                model = sm.OLS(pred, sm.add_constant(self._X_test[current_features])).fit()
-                p_values = model.pvalues
+                    model = sm.OLS(pred, sm.add_constant(self._X_test[current_features])).fit()
+                    p_values = model.pvalues
 
-                last_feature = self.__last_feature_is_okey(p_values=p_values, last_feature=feature, significance_level=significance_level)
+                    last_feature = self.__last_feature_is_okey(p_values=p_values, last_feature=feature, significance_level=significance_level)
 
-                if last_feature:
-                    selected_features.append(feature)
-                    features.remove(feature)
-                    break
+                    if last_feature:
+                        selected_features.append(feature)
+                        features.remove(feature)
+                        pbar.update(1)  # Update the progress bar for each added feature
+                        break
 
         return selected_features
 
@@ -398,7 +405,7 @@ class FeatureSelection:
         int
             The binomial coefficient.
         """
-        return np.math.factorial(n) / (np.math.factorial(r) * np.math.factorial(n - r))
+        return math.factorial(n) / (math.factorial(r) * math.factorial(n - r))
 
     @staticmethod
     def __get_possible_combinations_count(columns, start_from=1):

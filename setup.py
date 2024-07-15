@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='feature_selection_toolkit',
-    version='1.0.1',
+    version='1.0.2',
     author='Mevlüt Başaran',
     author_email='mevlutbasaran01@gmail.com',
     description='A comprehensive toolkit for performing various feature selection techniques in machine learning.',

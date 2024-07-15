@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='feature_selection_toolkit',
-    version='1.0.2',
+    version='1.0.3',
     author='Mevlüt Başaran',
     author_email='mevlutbasaran01@gmail.com',
     description='A comprehensive toolkit for performing various feature selection techniques in machine learning.',
@@ -37,15 +37,16 @@ setup(
     ],
     python_requires='>=3.8',
     install_requires=[
-        'pandas >= 2.2.2',
-        'scikit-learn >= 1.4.2',
-        'tqdm >= 4.66.4',
-        'xgboost >= 2.1.0',
-        'statsmodels >= 0.14.2',
-        'joblib >= 1.4.2',
-        'matplotlib >= 3.8.4',
-        'numpy >= 1.26.4',
-    ],
+        'pandas>=2.2.2,<3.0.0',
+        'scikit-learn>=1.4.2,<2.0.0',
+        'tqdm>=4.66.4,<5.0.0',
+        'xgboost>=2.1.0,<3.0.0',
+        'statsmodels>=0.14.2,<1.0.0',
+        'joblib>=1.4.2,<2.0.0',
+        'matplotlib>=3.8.4,<4.0.0',
+        'numpy>=1.26.4,<2.0.0',
+],
+
     test_suite='feature_selection_test',
     tests_require=['pytest'],
 )

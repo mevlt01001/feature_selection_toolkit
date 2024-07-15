@@ -269,7 +269,7 @@ class FeatureSelection:
 
         
 
-    def recursive_feature_elimination(self, estimator, n_features_to_select=None, force=False):
+    def recursive_feature_elimination(self, estimator=RandomForestRegressor(), n_features_to_select=None, force=False):
         """Perform recursive feature elimination (RFE).
 
         **Parameters**
@@ -289,6 +289,7 @@ class FeatureSelection:
         numpy.ndarray
             Ranked features with their corresponding importance scores.
         """
+
         if not force:
             if self.__is_classifier(estimator) and self._problem_type != 'classification':
                 raise ValueError("You selected a classification model, but the target variable suggests a regression problem. Please choose the correct model or use force=True.")

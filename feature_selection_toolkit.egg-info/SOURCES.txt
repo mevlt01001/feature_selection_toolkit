@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+feature_selection_test/__init__.py
+feature_selection_test/feature_selection_test.py
+feature_selection_toolkit/__init__.py
+feature_selection_toolkit/feature_selection.py
+feature_selection_toolkit.egg-info/PKG-INFO
+feature_selection_toolkit.egg-info/SOURCES.txt
+feature_selection_toolkit.egg-info/dependency_links.txt
+feature_selection_toolkit.egg-info/requires.txt
+feature_selection_toolkit.egg-info/top_level.txt

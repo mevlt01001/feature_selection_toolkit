@@ -5,7 +5,8 @@ from itertools import combinations
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, accuracy_score, r2_score
 from tqdm import tqdm
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, RandomForestRegressor, GradientBoostingRegressor
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, RandomForestRegressor, \
+    GradientBoostingRegressor
 from sklearn.naive_bayes import GaussianNB, BernoulliNB
 from sklearn.linear_model import LogisticRegression, LinearRegression, Lasso, Ridge
 from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
@@ -25,6 +26,7 @@ warnings.filterwarnings("ignore")
 # Numpy and pandas display settings
 np.set_printoptions(suppress=True)
 pd.set_option('display.float_format', lambda x: '%.4f' % x)
+
 
 class FeatureSelection:
     """A class used to perform various feature selection techniques.
@@ -104,8 +106,9 @@ class FeatureSelection:
         self._y = y
 
         # Split into training and test sets
-        self._X_train, self._X_test, self._y_train, self._y_test = train_test_split(self._X, self._y, test_size=0.3, random_state=42)
-        
+        self._X_train, self._X_test, self._y_train, self._y_test = train_test_split(self._X, self._y, test_size=0.3,
+                                                                                    random_state=42)
+
         # Determine the type of problem
         self._problem_type = self.__determine_problem_type()
 
@@ -130,7 +133,7 @@ class FeatureSelection:
             The selected features.
         """
         features = self._X.columns.tolist()
-        
+
         # Create a tqdm progress bar
         with tqdm(total=len(features), desc="Backward Elimination", unit="feature") as pbar:
             while features:
@@ -175,7 +178,6 @@ class FeatureSelection:
         features = self._X.columns.tolist()
         selected_features = []
 
-        
         with tqdm(total=len(features), desc="Forward Selection", unit="feature") as pbar:
             for i in range(len(features)):
                 for feature in features:
@@ -187,7 +189,8 @@ class FeatureSelection:
                     model = sm.OLS(pred, sm.add_constant(self._X_test[current_features])).fit()
                     p_values = model.pvalues
 
-                    last_feature = self.__last_feature_is_okey(p_values=p_values, last_feature=feature, significance_level=significance_level)
+                    last_feature = self.__last_feature_is_okey(p_values=p_values, last_feature=feature,
+                                                               significance_level=significance_level)
 
                     if last_feature:
                         selected_features.append(feature)
@@ -218,13 +221,17 @@ class FeatureSelection:
         """
         models = self._classifiers if self._problem_type == 'classification' else self._regressors
         metric = accuracy_score if self._problem_type == 'classification' else r2_score
-        
+
         scores = {}
-        print(f'{self.__get_possible_combinations_count(self._X.columns, r_start_on)} column combinations will be processed...')
-        
+        print(
+            f'{self.__get_possible_combinations_count(self._X.columns, r_start_on)} column combinations will be processed...')
+
         for r in range(r_start_on, len(self._X.columns) + 1):
-            for columns in tqdm(self.__get_combinations(self._X.columns, r), total=self.__binom(len(self._X.columns), r), desc=f'Processing for column combination (n={len(self._X.columns)}|r={r})'):
-                x_train, x_test, y_train, y_test = train_test_split(self._X[list(columns)], self._y, test_size=test_size, random_state=random_state)
+            for columns in tqdm(self.__get_combinations(self._X.columns, r),
+                                total=self.__binom(len(self._X.columns), r),
+                                desc=f'Processing for column combination (n={len(self._X.columns)}|r={r})'):
+                x_train, x_test, y_train, y_test = train_test_split(self._X[list(columns)], self._y,
+                                                                    test_size=test_size, random_state=random_state)
                 for model_name, model in models:
                     try:
                         model_instance = model()
@@ -235,7 +242,7 @@ class FeatureSelection:
                         continue
 
         return self.__find_best_score(scores)
-    
+
     def filter_method(self, method='chi2'):
         """Perform filter method for feature selection using chi2 or anova.
 
@@ -261,14 +268,12 @@ class FeatureSelection:
 
             X_positive = self._X - np.min(self._X)  # X'i pozitif yapmak için kaydırma
             return chi2(X_positive, self._y)
-        
+
         else:
 
             scores, p_values = method_func(self._X, self._y)
 
         return scores, p_values
-
-        
 
     def recursive_feature_elimination(self, estimator=RandomForestRegressor(), n_features_to_select=None, force=False):
         """Perform recursive feature elimination (RFE).
@@ -293,10 +298,12 @@ class FeatureSelection:
 
         if not force:
             if self.__is_classifier(estimator) and self._problem_type != 'classification':
-                raise ValueError("You selected a classification model, but the target variable suggests a regression problem. Please choose the correct model or use force=True.")
+                raise ValueError(
+                    "You selected a classification model, but the target variable suggests a regression problem. Please choose the correct model or use force=True.")
             elif self.__is_regressor(estimator) and self._problem_type != 'regression':
-                raise ValueError("You selected a regression model, but the target variable suggests a classification problem. Please choose the correct model or use force=True.")
-        
+                raise ValueError(
+                    "You selected a regression model, but the target variable suggests a classification problem. Please choose the correct model or use force=True.")
+
         if n_features_to_select is None:
             n_features_to_select = self._X.shape[1] // 2
 
@@ -314,7 +321,7 @@ class FeatureSelection:
         ranked_features = np.array([selected_features, selected_ranked]).T
 
         return self.__find_best_score(ranked_features.tolist())
-            
+
     def embedded_method(self, method='lasso', alpha=1.0):
         """Perform embedded method for feature selection.
 
@@ -342,7 +349,8 @@ class FeatureSelection:
         }
 
         if method not in method_dict:
-            raise ValueError("Unknown embedded method. Please choose 'lasso', 'ridge', 'decision_tree', or 'random_forest'.")
+            raise ValueError(
+                "Unknown embedded method. Please choose 'lasso', 'ridge', 'decision_tree', or 'random_forest'.")
 
         model = method_dict[method]
         model.fit(self._X, self._y)
@@ -375,7 +383,7 @@ class FeatureSelection:
             True if the model is a classifier, False otherwise.
         """
         return any(isinstance(model, cls) for _, cls in self._classifiers)
-    
+
     def __is_regressor(self, model):
         """Check if the given model is a regressor.
 
@@ -464,10 +472,10 @@ class FeatureSelection:
 
         if caller_name == 'recursive_feature_elimination':
             return sorted(scores, key=lambda x: x[1], reverse=False)
-        
+
         if caller_name == 'scored_columns':
             return sorted(scores.items(), key=lambda x: x[1][1], reverse=True)
-    
+
     @staticmethod
     def __find_bad_feature(pvalues, columns):
         """Find the feature with the highest p-value.

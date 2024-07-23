@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='feature_selection_toolkit',
-    version='1.0.7',
+    version='1.1.0',
     author='Mevlüt Başaran',
     author_email='mevlutbasaran01@gmail.com',
     description='A comprehensive toolkit for performing various feature selection techniques in machine learning.',
@@ -11,11 +11,10 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/mevlt01001/feature_selection_toolkit',
     project_urls={
-        'GitHub': 'https://github.com/mevlt01001',
+        'GitHub': 'https://github.com/mevlt01001/feature_selection_toolkit',
         'Bug Tracker': 'https://github.com/mevlt01001/feature_selection_toolkit/issues',
         'LinkedIn': 'https://www.linkedin.com/in/mevl%C3%BCt-ba%C5%9Faran-b46888251/',
         'Kaggle': 'https://www.kaggle.com/mevltbaaran',
-        
     },
     packages=find_packages(),
     classifiers=[
@@ -37,16 +36,15 @@ setup(
     ],
     python_requires='>=3.8',
     install_requires=[
-        'pandas>=2.2.2,<3.0.0',
-        'scikit-learn>=1.4.2,<2.0.0',
-        'tqdm>=4.66.4,<5.0.0',
-        'xgboost>=2.1.0,<3.0.0',
-        'statsmodels>=0.14.2,<1.0.0',
-        'joblib>=1.4.2,<2.0.0',
-        'matplotlib>=3.8.4,<4.0.0',
-        'numpy>=1.0.0,<2.0.0',
-],
-
-    test_suite='feature_selection_test',
+        'pandas',
+        'scikit-learn',
+        'tqdm',
+        'xgboost',
+        'statsmodels',
+        'joblib',
+        'matplotlib',
+        'numpy',
+    ],
+    test_suite='feature_selection_test',  # Ensure this is the correct path to your test suite
     tests_require=['pytest'],
 )

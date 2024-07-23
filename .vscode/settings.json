@@ -1,7 +1,0 @@
-{
-    "python.testing.pytestArgs": [
-        "feature_selection_test"
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
-}

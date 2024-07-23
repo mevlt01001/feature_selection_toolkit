@@ -1,2 +1,0 @@
-feature_selection_test
-feature_selection_toolkit

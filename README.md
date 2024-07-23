@@ -22,6 +22,7 @@
     - [Brute Force Search](#brute-force-search)
         - [Scored Columns](#scored-columns)
         - [RFE Brute Force](#rfe-brute-force)
+        - [Tips for Brute Force Search](#tips-for-brute-force-search)
 5. [Statistical Evidence](#statistical-evidence)
 6. [Real-World Examples](#real-world-examples)
     - [Example 1: Iris Dataset](#example-1-iris-dataset)
@@ -245,6 +246,7 @@ best_features = fs.rfe_brute_force(estimator=RandomForestClassifier(), n_feature
 print("Best Features from RFE Brute Force:", best_features)
 ```
 
+
 Benefits:
 - Ensures the selection of the optimal feature subset by combining RFE and brute force search.
 - Provides a robust evaluation of feature importance and interactions.
@@ -252,6 +254,22 @@ Benefits:
 
 Use Case:
 Ideal for complex datasets where both feature importance and interactions need to be evaluated comprehensively to select the best feature subset.
+
+#### Tips for Brute Force Search
+Brute force search can take a long time on large datasets. To improve performance, you might consider working with a smaller sample of your data. This can be achieved using the 'df.sample(n=...)' method to randomly select a subset of your data. This approach can be particularly useful when dealing with high-volume data. However, keep in mind that this might not be suitable for every problem.
+
+```
+# Reducing your dataset with sampling
+X_sampled = X.sample(n=1000)  # Adjust n based on your dataset size
+y_sampled = y[X_sampled.index]
+
+fs = FeatureSelection(X_sampled, y_sampled)
+best_features = fs.rfe_brute_force(estimator=RandomForestClassifier(), n_features_to_select=5, force=True)
+print("Best Features from RFE Brute Force:", best_features)
+```
+#### **Note**: 
+**This approach allows you to work with a random subset of your dataset, so different sampling runs might yield different results. Therefore, it is important to retrain the final model with the entire dataset.**
+
 
 ## Statistical Evidence
 The methods included in this toolkit are based on well-established statistical techniques and have been extensively validated in academic research. For instance:

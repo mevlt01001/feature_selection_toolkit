@@ -256,7 +256,7 @@ Use Case:
 Ideal for complex datasets where both feature importance and interactions need to be evaluated comprehensively to select the best feature subset.
 
 #### Tips for Brute Force Search
-Brute force search can take a long time on large datasets. To improve performance, you might consider working with a smaller sample of your data. This can be achieved using the 'df.sample(n=...)' method to randomly select a subset of your data. This approach can be particularly useful when dealing with high-volume data. However, keep in mind that this might not be suitable for every problem.
+Brute force search can take a long time on large datasets. To improve performance, you might consider working with a smaller sample of your data. This can be achieved using the `df.sample(n=...)` method to randomly select a subset of your data. This approach can be particularly useful when dealing with high-volume data. However, keep in mind that this might not be suitable for every problem.
 
 ```
 # Reducing your dataset with sampling
